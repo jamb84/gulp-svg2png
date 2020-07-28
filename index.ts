@@ -20,6 +20,7 @@ const map = require('map-stream');
 const svg2png = require('svg2png');
 const log = require('fancy-log')
 const PluginError = require('plugin-error')
+const Vinyl = require('vinyl')
 
 import { SVG } from './lib/index';
 
@@ -74,7 +75,7 @@ class Command {
 
 		svg2png(source, this.options)
 			.then((contents: Buffer) => {
-				cb(null, new gutil.File({
+				cb(null, new Vinyl({
 					base: source.base,
 					path: this.rename(source.path),
 					contents
